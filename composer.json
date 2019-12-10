@@ -1,0 +1,28 @@
+{
+    "name": "fmihel/convert-pdf-to-image",
+    "description": "convert pdf to image (use imagick)",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "fmihel",
+        "pdf",
+        "convert",
+        "image"
+    ],
+    "authors": [
+        {
+            "name": "fmihel",
+            "email": "fmihel76@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : "^7.0",
+        "ext-imagick" : "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "fmihel\\ConvertPdfToImage\\": "source"
+        }
+    }
+    
+}
