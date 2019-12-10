@@ -19,6 +19,7 @@ class ConvertPdfToImage{
         'addIndexPageToName'=>false,// only for page === number
         'needHeader'=>false,        // out header("Content-Type: image/...) before out to browwser (for out only)
         'outReturn' =>false,        // out return image as result or not to browser (for out only)
+        'compression'=>100,
     ];
     
     
@@ -87,17 +88,19 @@ class ConvertPdfToImage{
     }
     private function _read(&$params){
         
-        $param = array_merge($this->params,$params);
+        $params = array_merge($this->params,$params);
 
         if (!file_exists($this->realFileName))
             throw new \Exception("file [$this->realFileName] not exists or empty(use load)");
                 
         $this->imagick = new \Imagick();
-        $page = $param['page'] !== 'all' ?'['.$param['page'].']' : '' ;
+        $this->imagick->setResolution($params['resolution'],$params['resolution']);
+        $this->imagick->setCompressionQuality($params['compression']);
+        
+        $page = $params['page'] !== 'all' ?'['.$params['page'].']' : '' ;
         $this->imagick->readImage($this->realFileName.$page);
         
-        $this->imagick->setResolution($param['resolution'],$param['resolution']);
-        $this->imagick->setImageFormat($param['format']);            
+        $this->imagick->setImageFormat($params['format']);            
 
     }    
     /** 
